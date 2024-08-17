@@ -1,0 +1,37 @@
+.loginContainer {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.loginForm {
+    border: solid 2px black;
+    border-radius: 6px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 20px;
+    padding: 20px;
+}
+
+.loginFormTitle {
+    margin-bottom: 20px;
+}
+
+.loginFormImput {
+    display: flex;
+    flex-direction: column;
+    row-gap: 2px;
+}
+
+.error {
+    color: red;
+}
+
+.loginFormLink {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 5px;
+}

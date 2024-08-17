@@ -1,0 +1,12 @@
+.searchBox {
+    margin-top: 20px;
+}
+.searchBoxInput {
+    width: 260px;
+    border-radius: 6px;
+}
+
+.searchBoxInput:focus    {
+    outline: rgb(50, 147, 204);
+    border-color: rgb(50, 147, 204);
+}
