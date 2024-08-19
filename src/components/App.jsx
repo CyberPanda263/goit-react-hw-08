@@ -11,10 +11,9 @@ import { getMeThunk } from '../redux/auth/operations'
 import { PrivateRoute } from '../Routes/PrivateRoute'
 import { PublicRoute } from '../Routes/PublicRoute'
 import { selectIsErrorAuth, selectIsRefreshing } from '../redux/auth/selectors'
-import Loader from './loader/Loader'
 import { Toaster } from 'react-hot-toast';
 import ErrorPage from '../pages/ErrorPage/ErrorPage'
-
+import Loader from './loader/Loader'
 const App = () => {
 
   const dispatch = useDispatch();
