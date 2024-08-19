@@ -34,6 +34,7 @@ const ContactForm = () => {
 
     if (contactExists) {
       toast.error('Contact already exists');
+      actions.resetForm();
     } else {
       dispatch(addContact(newContact))
         .unwrap()

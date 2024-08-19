@@ -6,7 +6,7 @@ import { useEffect } from 'react';
 import { fetchContacts } from '../../redux/contacts/operations';
 import { selectIsLoading } from '../../redux/contacts/selectors';
 import ModalChengeContact from './Modal/ModalChengeContact'
-import Loader from '../loader/Loader';
+import Loader from '../Loader/Loader';
 import css from './Contacts.module.css'
 
 function Contacts() {

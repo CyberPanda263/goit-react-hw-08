@@ -13,7 +13,7 @@ import { PublicRoute } from '../Routes/PublicRoute'
 import { selectIsErrorAuth, selectIsRefreshing } from '../redux/auth/selectors'
 import { Toaster } from 'react-hot-toast';
 import ErrorPage from '../pages/ErrorPage/ErrorPage'
-import Loader from './loader/Loader.jsx'
+import Loader from './Loader/Loader'
 const App = () => {
 
   const dispatch = useDispatch();
