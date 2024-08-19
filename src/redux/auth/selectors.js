@@ -5,3 +5,4 @@ export const selectIsRefreshing = state => state.auth.isRefreshing
 export const selectErrorMessage = state => state.auth.errorMessage
 export const selectIsErrorAuth = state => state.auth.isError
 export const selectIsLoginError = state => state.auth.isLoginError
+export const selectIsRegisterError = state => state.auth.isRegisterError

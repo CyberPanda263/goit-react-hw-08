@@ -2,13 +2,15 @@ import { Field, Formik, Form, ErrorMessage } from "formik"
 import css from "../LoginForm/LoginForm.module.css"
 import * as Yup from "yup";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { registerThunk } from "../../redux/auth/operations";
 import toast from "react-hot-toast";
+import { selectIsRegisterError } from "../../redux/auth/selectors";
 
 const RegistrationForm = () => {
 
     const dispatch = useDispatch();
+    const isError = useSelector(selectIsRegisterError);
 
     const FeedbackSchema = Yup.object().shape({
         name: Yup.string().min(3, "Too short name!").max(50, "Too Long!").required("Required"),
@@ -39,6 +41,7 @@ const RegistrationForm = () => {
             <Formik initialValues={initialValues} validationSchema={FeedbackSchema} onSubmit={handlSubmit}>
                 <Form className={css.loginForm}>
                     <h1 className={css.loginFormTitle}>Registration</h1>
+                    {isError === '400' && <p className={css.error}>A user with such data already exists</p>}
                     <div className={css.loginFormImput}>
                         <label>Name:</label>
                         <Field className={css.loginFormField} name='name' placeholder='Enter your name' />

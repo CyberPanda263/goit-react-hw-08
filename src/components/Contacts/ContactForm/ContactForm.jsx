@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addContact } from "../../../redux/contacts/operations";
 import toast from "react-hot-toast";
 import { selectContacts } from "../../../redux/contacts/selectors";
+import { changeFilter } from "../../../redux/filter/slice";
 
 const FeedbackSchema = Yup.object().shape({
   name: Yup.string().min(3, "Too Short!").max(50, "Too Long!").required("Required"),
@@ -15,7 +16,6 @@ const initialValues = {
   name: "",
   number: "",
 };
-
 
 const ContactForm = () => {
 
@@ -28,12 +28,28 @@ const ContactForm = () => {
       number: values.number,
     };
 
-    const contactExists = existingContacts.some(
-      (contact) => contact.name === newContact.name || contact.number === newContact.number
-    );
+    const isContactExists = () => {
+        const contactExists = existingContacts.filter(contact =>
+          contact.name.toLowerCase() === newContact.name.toLowerCase() || contact.number.toLowerCase() === newContact.number.toLowerCase(),
+        )
 
-    if (contactExists) {
-      toast.error('Contact already exists');
+        if(contactExists.length !== 0) {
+          console.log(contactExists[0].name)
+          if(contactExists[0].name === newContact.name) {
+            toast.error('A contact with that name already exists');
+            dispatch(changeFilter(newContact.name))
+            return true;
+          }
+          console.log(contactExists[0].number)
+          toast.error('A contact with this number already exists');
+          dispatch(changeFilter(newContact.number))
+          return true;
+        }
+
+        return false;
+      }
+
+    if (isContactExists()) {
       actions.resetForm();
     } else {
       dispatch(addContact(newContact))
