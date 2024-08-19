@@ -11,3 +11,34 @@ ul {
     padding-left: 0;
     list-style: none;
 }
+
+#root {
+    width: 1156px;
+    margin: 0 auto;
+
+}
+
+body {
+    background: radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(31,123,147,1) 100%);
+    color:beige;
+}
+
+button {
+    border: solid 1px transparent;
+    background: #10acbd;
+    color: white;
+    border-radius: 6px;
+    padding: 7px;
+    cursor: pointer;
+    -webkit-box-shadow: 4px 3px 3px 1px rgba(18,7,18,0.51);
+    -moz-box-shadow: 4px 3px 3px 1px rgba(18,7,18,0.51);
+    box-shadow: 4px 3px 3px 1px rgba(18,7,18,0.51);
+    text-shadow: 2px 3px 2px rgba(0,0,0,0.76);
+}
+
+button:hover {
+    background: #107480;
+    -webkit-box-shadow: 3px 3px 3px 1px rgba(20,20,20,1);
+    -moz-box-shadow: 3px 3px 3px 1px rgba(20,20,20,1);
+    box-shadow: 3px 3px 3px 1px rgba(20,20,20,1);
+}

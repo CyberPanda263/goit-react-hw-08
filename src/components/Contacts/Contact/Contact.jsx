@@ -1,27 +1,28 @@
 import { BsFillPersonFill } from "react-icons/bs";
 import { BsFillTelephoneFill } from "react-icons/bs";
-import { useDispatch } from 'react-redux';
-import { changeContact, deleteContact } from "../../../redux/contacts/operations";
-import ModalChengeContact from "../Modal/modalChengeContact";
-import ModalDeleteContact from "../Modal/modalDeleteContact";
+import { useDispatch } from "react-redux";
+import { openModal } from '../../../redux/contacts/slice';
+import css from './Contact.module.css';
+const Contact = ({ id, name, number }) => {
+  const dispatch = useDispatch();
 
-const Contact = ({id, name, number}) => {
+  const handleOpenModal = (type) => {
+    dispatch(openModal({ id, name, number, type }));
+    
+  };
 
-    const dispath = useDispatch();
-   
-        return (
-            <>
-                <div>
-                    <p><BsFillPersonFill /> {name}</p>
-                    <p><BsFillTelephoneFill /> {number}</p>
-                </div>
-                <div>
-                <button onClick={() => ModalChengeContact()}>Change</button>
-                    <button onClick={() => ModalDeleteContact()}>Delet</button>
-                </div>
-            </>
-        )
-    }
+  return (
+    <>
+      <div className={css.contact}>
+        <p><BsFillPersonFill /> {name}</p>
+        <p><BsFillTelephoneFill /> {number}</p>
+      </div>
+      <div className={css.contactButtons}>
+        <button onClick={() => handleOpenModal('change')}>Change</button>
+        <button onClick={() => handleOpenModal('delete')}>Delete</button>
+      </div>
+    </>
+  );
+};
 
-
-export default Contact
+export default Contact;

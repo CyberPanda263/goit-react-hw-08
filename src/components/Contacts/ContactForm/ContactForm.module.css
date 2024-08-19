@@ -1,16 +1,29 @@
 .form {
     display: flex;
     flex-direction: column;
-    width: 250px;
+    align-items: center;
+    row-gap: 10px;
     margin-top: 20px;
-    padding: 10px;
-    border: solid 1px black;
+    border: solid 1px white;
     border-radius: 6px;
+    width: 720px;
+    padding: 10px 20px;
+    text-shadow: 2px 3px 2px rgba(0,0,0,0.76);
+    -webkit-box-shadow: 4px 3px 3px 1px rgba(18, 7, 18, 0.51);
+    -moz-box-shadow: 4px 3px 3px 1px rgba(18, 7, 18, 0.51);
+    box-shadow: 4px 3px 3px 1px rgba(18, 7, 18, 0.51);
 }
 
-.formItem {
+.formBox {
     display: flex;
-    flex-direction: column;
+    align-items: baseline;
+    column-gap: 30px;
+}
+
+.formItemBox {
+    display: flex;
+    align-items: center;
+    column-gap: 5px;
     margin-bottom: 10px;
 }
 
@@ -21,14 +34,26 @@
 }
 
 .error {
-    color: red;
+    color: #ff6b6b;
 }
 
 .formInput {
     border-radius: 6px;
+    background-color: transparent;
+    color: white;
+    border: solid 1px white;
+    padding: 5px;
+    -webkit-box-shadow: 4px 3px 3px 1px rgba(18, 7, 18, 0.51);
+    -moz-box-shadow: 4px 3px 3px 1px rgba(18, 7, 18, 0.51);
+    box-shadow: 4px 3px 3px 1px rgba(18, 7, 18, 0.51);
+}
+
+.formInput::placeholder {
+    color: white;
+    opacity: 0.5;
 }
 
 .formInput:focus {
-    outline: rgb(50, 147, 204);
-    border-color: rgb(50, 147, 204);
+    outline: rgb(195, 195, 197);
+    border-color: rgb(195, 195, 197);
 }

@@ -7,20 +7,35 @@ const initialState = {
     isLoading: false,
     isError: false,
     isModalOpen: false,
+    modalType: '',
+    currentContactId: '',
+    currentName: '',
+    currentNumber: '',
 }
 
 const slice = createSlice({
     name: 'contact',
     initialState,
-
     reducers: {
-        modalIsOpen: (state, action) => {
-            state.isModalOpen = true;
+        openModal: (state, action) => {
+          state.isModalOpen = true;
+          state.modalType = action.payload.type;
+          state.currentContactId = action.payload.id;
+          state.currentName = action.payload.name;
+          state.currentNumber = action.payload.number;
         },
-        maodalIsClose: (state, action) => {
-            state.isModalOpen = false;
+        closeModal: (state, action) => {
+          state.isModalOpen = false;
+          state.modalType = '';
+          state.currentContactId = '';
+          state.name = '';
+          state.number = '';
+        },
+        isAddedContact: (state, action) => {
+            state.currentName = action.payload.name;
+            state.currentNumber = action.payload.number;
         }
-    },
+      },
     
     extraReducers: builder => {
         builder.addCase(fetchContacts.fulfilled, (state, action) => {
@@ -36,28 +51,21 @@ const slice = createSlice({
         .addCase(addContact.fulfilled, (state, action) => {
             state.items.push(action.payload);
         })
-        .addCase(addContact.rejected, (state, action) => {
-            state.isError = true;
-        })
         .addCase(changeContact.fulfilled, (state, action) => {
             const index = state.items.findIndex(item => item.id === action.payload.id);
             if (index !== -1) {
                 state.items[index] = { ...state.items[index], ...action.payload };
             }
         })
-        .addCase(changeContact.rejected, (state, action) => {
-            state.isError = true;
-        })
         .addCase(deleteContact.fulfilled, (state, action) => {
             state.items = state.items.filter(item => item.id !== action.payload);
-        })
-        .addCase(deleteContact.rejected, (state, action) => {
-            state.isError = true;
         })
     }
 })
 
 export const contactReduser = slice.reducer;
-export const modalIsOpen = slice.actions;
-export const maodalIsClose = slice.actions;
+export const { modalIsOpen } = slice.actions;
+export const { openModal, closeModal, isAddedContact } = slice.actions;
+
+export default slice.reducer;
 

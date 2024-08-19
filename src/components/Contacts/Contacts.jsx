@@ -4,34 +4,30 @@ import SearchBox from './SearchBox/SearchBox'
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { fetchContacts } from '../../redux/contacts/operations';
-import { selectIsError, selectIsLoading } from '../../redux/contacts/selectors';
+import { selectIsLoading } from '../../redux/contacts/selectors';
+import ModalChengeContact from './Modal/ModalChengeContact'
+import Loader from '../loader/Loader';
+import css from './Contacts.module.css'
 
 function Contacts() {
-    const title = "PhoneBook";
+    const title = "Phonebook";
     const isLoading = useSelector(selectIsLoading)
-    const isError = useSelector(selectIsError);
     const dispatch = useDispatch();
-   
+    
     useEffect(() => {
        dispatch(fetchContacts());
     }, [dispatch])
    
      return (
-       <div>
-         <h1>{title}</h1>
-         <ContactForm
-         />
-         <SearchBox 
-         />
-         <ContactList
-         />
-         {isLoading && <h1>Loading...</h1>}
-         {isError && 
-         <div>
-           <h1>Error: </h1>
-           <p>there is no connection with the server</p>
+       <div className={css.contacts}>
+        {isLoading && <Loader />}
+         <h1 className={css.contactsTitle}>{title}</h1>
+         <div className={css.optionsFeid}>
+          <ContactForm />
+          <SearchBox />
          </div>
-         }
+         <ContactList />
+         <ModalChengeContact />
        </div>
      )
    }

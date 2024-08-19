@@ -1,4 +1,4 @@
-import { createAsyncThunk, current, isRejectedWithValue } from "@reduxjs/toolkit";
+import { createAsyncThunk} from "@reduxjs/toolkit";
 import { clearTocen, goItApi, setToken } from "../../config/goItApi";
 
 
@@ -9,7 +9,7 @@ export const registerThunk = createAsyncThunk('register', async(credentials, thu
         setToken(data.token);
         return data;
     } catch (error) {
-        return thunkAPI.rejectWithValue(error.massage);
+        return thunkAPI.rejectWithValue(error.message);
     }
 })
 
@@ -19,7 +19,10 @@ export const loginThunk = createAsyncThunk('login', async(credentials, thunkAPI)
         setToken(data.token);
         return data;
     } catch (error) {
-        return thunkAPI.rejectWithValue(error.massage);
+        if (error.response && error.response.status === 400) {
+            return thunkAPI.rejectWithValue('400');
+          }
+        return thunkAPI.rejectWithValue(error.message);
     }
 })
 
@@ -28,7 +31,7 @@ export const LoguotThunk = createAsyncThunk('logout', async (_, thunkAPI) => {
         await goItApi.post('users/logout');
         clearTocen();
     } catch (error) {
-        return thunkAPI.rejectWithValue(error.massage);
+        return thunkAPI.rejectWithValue(error.message);
     }
 })
 
@@ -42,6 +45,10 @@ export const getMeThunk = createAsyncThunk('getMe', async (_, thunkAPI) => {
         const {data} = await goItApi.get('users/current');
         return data;
     } catch (error) {
-        return thunkAPI.rejectWithValue(error.massage);
+        if (error.response && error.response.status === 500) {
+            return thunkAPI.rejectWithValue('Network Error');
+          }
+        return thunkAPI.rejectWithValue(error.message);
     }
+
 })

@@ -47,7 +47,7 @@
 }
 
 .error {
-    color: red;
+    color: #ff6b6b;
 }
 
 .loginFormLink {
@@ -68,6 +68,7 @@
     -moz-box-shadow: 4px 3px 3px 1px rgba(18,7,18,0.51);
     box-shadow: 4px 3px 3px 1px rgba(18,7,18,0.51);
     text-shadow: 2px 3px 2px rgba(0,0,0,0.76);
+    text-decoration: none;
 }
 
 .loginFormLinkA:hover {
@@ -75,8 +76,4 @@
     -webkit-box-shadow: 3px 3px 3px 1px rgba(20,20,20,1);
     -moz-box-shadow: 3px 3px 3px 1px rgba(20,20,20,1);
     box-shadow: 3px 3px 3px 1px rgba(20,20,20,1);
-}
-
-.loginFormLinkA:active {
-    background-color: transparent;
 }

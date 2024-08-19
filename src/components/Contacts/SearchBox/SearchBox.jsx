@@ -10,8 +10,10 @@ const SearchBox = () => {
 
     return(
         <div className= {css.searchBox}>
-            <p>Find contacts by name</p>
-            <input className= {css.searchBoxInput} 
+            <h3>Find contacts</h3>
+            <input 
+            className= {css.searchBoxInput}
+            placeholder='Enter contact name or number' 
             type='text' 
             onChange={(evet) => dispath(changeFilter(evet.target.value))} />
         </div>

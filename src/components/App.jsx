@@ -10,29 +10,36 @@ import { useEffect } from 'react'
 import { getMeThunk } from '../redux/auth/operations'
 import { PrivateRoute } from '../Routes/PrivateRoute'
 import { PublicRoute } from '../Routes/PublicRoute'
-import { selectIsRefreshing } from '../redux/auth/selectors'
+import { selectIsErrorAuth, selectIsRefreshing } from '../redux/auth/selectors'
 import Loader from './loader/Loader'
+import { Toaster } from 'react-hot-toast';
+import ErrorPage from '../pages/ErrorPage/ErrorPage'
 
 const App = () => {
 
   const dispatch = useDispatch();
   const isRefreshing = useSelector(selectIsRefreshing);
+  const isError = useSelector(selectIsErrorAuth);
 
   useEffect(() => {
     dispatch(getMeThunk());
   }, [dispatch]);
 
-  return isRefreshing ? <Loader /> : (
+  return isError === "Network Error" ? <ErrorPage /> : isRefreshing ? <Loader /> : (
     <>
     <Routes>
       <Route path='/' element={<Layout />}>
-        <Route index element={<HomePage />} />
+        <Route index element={
+          <HomePage />
+          } />
         <Route path='/contacts' element={
           <PrivateRoute>
             <ContactsPage />
           </PrivateRoute>
           } />
-        <Route path='*' element={<NotFoundPage />} />
+        <Route path='*' element={
+          <NotFoundPage />
+          } />
       </Route>
       <Route path='/login' element={
         <PublicRoute>
@@ -45,6 +52,10 @@ const App = () => {
         </PublicRoute>
         } />
     </Routes>
+    <Toaster
+      position="top-center"
+      reverseOrder={false}
+    />
     </>
   )
 }

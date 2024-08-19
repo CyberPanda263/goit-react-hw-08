@@ -6,7 +6,7 @@ export const fetchContacts = createAsyncThunk('contacts/fetchAl', async (_, thun
         const { data } = await goItApi.get('contacts');
         return data;
     } catch (error) {
-        return thunkApi.rejectWithValue(error.massage);
+        return thunkApi.rejectWithValue(error.message);
     }
 });
 
@@ -15,16 +15,16 @@ export const addContact = createAsyncThunk('contacts/addContact', async (body, t
         const { data } = await goItApi.post('contacts', body);
         return data;
     } catch (error) {
-        return thunkApi.rejectWithValue(error.massage);
+        return thunkApi.rejectWithValue(error.message);
     }
 })
 
-export const changeContact = createAsyncThunk('contacts/changeContact', async (id, thunkApi) => {
+export const changeContact = createAsyncThunk('contacts/changeContact', async ({ id, body }, thunkApi) => {
     try {
-        const { data } = await goItApi.patch(`contacts/${id}`);
-        return data.id;
+        const { data } = await goItApi.patch(`contacts/${id}`, body);
+        return data;
     } catch (error) {
-        return thunkApi.rejectWithValue(error.massage);
+        return thunkApi.rejectWithValue(error.message);
     }
 })
 
@@ -33,6 +33,7 @@ export const deleteContact = createAsyncThunk('contacts/deleteContact', async (i
         const { data } = await goItApi.delete(`contacts/${id}`);
         return data.id;
     } catch (error) {
-        return thunkApi.rejectWithValue(error.massage);
+        return thunkApi.rejectWithValue(error.message);
     }
 });
+
